@@ -8,9 +8,9 @@ This layer converts all the templating data into a very general form that ensure
 
 Do traditional template-and-data templating as follows:
 
->>> from nouns import template
->>> template(dict(name='World'), 'Hello $name!')
-Hello World!
+    >>> from nouns import template
+    >>> template(dict(name='World'), 'Hello $name!')
+    Hello World!
 
 But the more interesting/intended use is to not explicitly pass in a template. Instead, just pass in the data - let the templating engine itself figure out which templates to use.
 
