@@ -75,12 +75,12 @@ RENDERED_TABLE = """\
 
     <tbody>
       <tr>
-        <td style="background: linear-gradient(to right, transparent 0.0%, #eee 0.0%, #eee 28.57142857142857%, transparent 28.57142857142857%">1<span>.0</span></td>
-        <td style="background: linear-gradient(to right, transparent 0.0%, #eee 0.0%, #eee 50.0%, transparent 50.0%">2</td>
+        <td style="">NULL</td>
+        <td style="background: linear-gradient(to right, transparent 0.0%, #eee 0.0%, #eee 100.0%, transparent 100.0%">2</td>
       </tr>
       <tr>
         <td style="background: linear-gradient(to right, transparent 0.0%, #eee 0.0%, #eee 100.0%, transparent 100.0%">3.5</td>
-        <td style="background: linear-gradient(to right, transparent 0.0%, #eee 0.0%, #eee 100.0%, transparent 100.0%">4</td>
+        <td style=""></td>
       </tr>
     </tbody>
   </table>
@@ -90,7 +90,7 @@ RENDERED_TABLE = """\
 def test_table_templating():
     templates = nouns.Templates(folders=example_templates_folder, preprocess=x)
 
-    data = results.Results([dict(a=1, b=2), dict(a=3.5, b=4)])
+    data = results.Results([dict(a=None, b=2), dict(a=3.5, b="")])
 
     transformed = x(data, style="stylish")
     transformed["_style"] = x("stylish")

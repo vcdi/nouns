@@ -94,14 +94,16 @@ def process_mapping(xvalue, x):
 
     attrs_dict = {c["_key"][VAL]: c for c in contents}
 
-    return x._x("mapping", orig, value=None, attrs_dict=attrs_dict)
+    return x._x("mapping", orig, value=None, attrs_dict=attrs_dict, is_renderable=False)
 
 
 def process_iterable(xvalue, x):
     contents = [x(_) for _ in xvalue]
 
     attrs_dict = {str(i): v for i, v in enumerate(contents)}
-    return x._x("iterable", xvalue, value=None, attrs_dict=attrs_dict)
+    return x._x(
+        "iterable", xvalue, value=None, attrs_dict=attrs_dict, is_renderable=False
+    )
 
 
 def process_table(xvalue, x, **kwargs):
@@ -120,7 +122,7 @@ def process_table(xvalue, x, **kwargs):
     extras.update(contents)
 
     # extras = None
-    return x._x("table", contents, value=None, attrs_dict=extras)
+    return x._x("table", contents, value=None, attrs_dict=extras, is_renderable=False)
 
 
 def process_none(xvalue, x):
@@ -186,10 +188,10 @@ class X(object):
         processed[ATTR_NAME] = xtype or processor_name
         return processed
 
-    def _x(self, nounstype, original, value=None, attrs_dict=None):
+    def _x(self, nounstype, original, value=None, attrs_dict=None, is_renderable=True):
         result = {ATTR_NAME: nounstype, ORIG: original}
 
-        if value:
+        if is_renderable:
             result[VAL] = value
 
         if attrs_dict:

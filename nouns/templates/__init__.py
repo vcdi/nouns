@@ -36,7 +36,7 @@ def filter_each(t, data, parameter=None):
 
 def filter_ensuretext(t, data, parameter=None):
     if data is None:
-        return ""
+        return "NULL"
 
     if not isinstance(data, str):
         if NOUNS_KEY not in data:
